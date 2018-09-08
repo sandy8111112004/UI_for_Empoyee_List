@@ -38,3 +38,10 @@ header {
     font-size: 36px;
     font-weight: bold;
 }
+
+#displayBoard {
+    padding:10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}

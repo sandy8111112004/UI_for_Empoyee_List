@@ -41,20 +41,72 @@ const employeeList = [
   }
 ];
 
-//const userCommand =  prompt('Enter command here! Available commands are: print, update, verify, lookup, delete, conains, and add').toLowerCase();
 
-const printList=function(){
-  for(let i=0;;i++){
-
+//print function
+const printFunc = function(){
+  $('#displayBoard').empty();
+  for(let i=0;i<employeeList.length;i++){
+    $('#displayBoard').append(`<div>${employeeList[i].name}</br>#${employeeList[i].officeNum}</br>${employeeList[i].phoneNum}</br></br></div>`);
   }
 }
 
+// verify function
+const buttonVerify = function(){
+  event.preventDefault();
+  const input = $('#verifyInput').val();
+  let message = 'Employee Not Found';
+  for(let i=0;i<employeeList.length;i++){
+    if (employeeList[i].name.toLowerCase() === input.toLowerCase){
+      message = 'Employee Found';
+    }
+  }
+  $('#displayBoard').append(`<div>${message}</div>`);
+}
 
+const verifyFunc = function(){
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  <input type="text" id="verifyInput" placeholder="Employee Name" autocomplete="off" />
+  <button id="verifySubmit">Verify</button>
+  </form></div>`);
+  $('#verifySubmit').on('click',buttonVerify);
+} 
+
+
+/*
+const lookupFunc= function(){
+  let message = 'Not in list!'
+  for(let i=0;i<employeeList.length;i++){
+    if (employeeList[i].name.toLowerCase() === searchName){
+      message =`Name: ${employeeList[i].name}, 
+      Office Number: ${employeeList[i].officeNum}, 
+      Phone Number:  ${employeeList[i].phoneNum}`; 
+    }
+  }
+  render(message);
+}
+
+const containsFunc = function(){
+  let found=false;
+  for (let i=0;i< employeeList.length;i++){
+    if (employeeList[i].name.indexOf(keyword)!== -1){
+      render(employeeList[i].name);
+      found=true;
+    }
+  }
+  if (!found){
+    render('no match');
+  }
+}
+*/
+
+
+/*
 if(userCommand === 'print'){
   for(let i=0;i<employeeList.length;i++){
     render(`Name:${employeeList[i].name}, Office Number: ${employeeList[i].officeNum}, Phone Number: ${employeeList[i].phoneNum}`);
   }
-  $('#print').on('click',printList);
 }else if(userCommand === 'verify'){
   const searchName = prompt("enter name you want to search!").toLowerCase();
   let message = 'False';
@@ -135,9 +187,15 @@ if(userCommand === 'print'){
   }
 }else{
   render('command not found!!!!');
-}
+}*/
 
-
+$('#print').on('click',printFunc);
+$('#verify').on('click',verifyFunc);/*
+$('#lookup').on('click',lookupFunc);
+$('#contains').on('click',contatinsFunc);
+$('#updates').on('click',updatesFunc);
+$('#add').on('click',addFunc);
+$('#delete').on('click',deleteFunc);*/
 
 
 
