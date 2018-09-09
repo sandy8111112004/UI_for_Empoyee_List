@@ -53,10 +53,6 @@ header {
     font-weight: bold;
     color: black;
     justify-content: center;
-}
-
-#displayBoard{
-    display: grid;
     height: 98%;
     grid-template-columns: 1fr;
     grid-template-rows: 160px 1fr;
@@ -65,12 +61,12 @@ header {
     color: #666666;
     font-weight: normal;
 }
-#displayBoard div{
+/*#displayBoard div{
     display: grid;
     grid-row: span 1;
     grid-column: span 1;
     justify-content: center;
-}
+}*/
 
 
 .box1 {
@@ -80,6 +76,10 @@ header {
     text-align: end;
     line-height: 2;
     align-items: center;
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    justify-content: center;
 }
 
 .box1 input{
@@ -105,5 +105,9 @@ header {
     font-size: 18px;
     font-weight: bold;
     padding-top: 10px;
+    display: grid;
+    grid-row: span 1;
+    grid-column: span 1;
+    justify-content: center;
 }
 

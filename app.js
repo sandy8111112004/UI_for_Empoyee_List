@@ -44,15 +44,17 @@ const employeeList = [
 
 //print function
 const printFunc = function(){
-  $('#displayBoard').empty();
+  $('.box1').empty();
+  $('.box2').empty();
   for(let i=0;i<employeeList.length;i++){
-    $('#displayBoard').append(`<div class='side box2'>${employeeList[i].name}</br>#${employeeList[i].officeNum}</br>${employeeList[i].phoneNum}</br></br></div>`);
+    $('.box2').append(`<div class='side'>${employeeList[i].name}</br>#${employeeList[i].officeNum}</br>${employeeList[i].phoneNum}</br></br></div>`);
   }
 }
 
 // verify function
-const buttonVerify = function(){
+const buttonVerify = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const input = $('#verifyInput').val();
   let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
@@ -60,25 +62,30 @@ const buttonVerify = function(){
       message = 'Employee Found';
     }
   }
-  $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+  console.log('in verify button');
+  $('.box2').append(`<div>${message}</div>`);
 }
 
-const verifyFunc = function(){
+const verifyFunc = function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box1').empty();
+  $('.box2').empty();
+  //document.querySelectorAll('hr').style='display:block;';
+  $('.box1').append(`<div><form>
   <input type="text" id="verifyInput" placeholder="Employee Name" autocomplete="off" />
   <button id="verifySubmit">Verify</button>
   </form></div>`);
+
   $('#verifySubmit').on('click',buttonVerify);
 } 
+$('#verifySubmit').on('click',buttonVerify);
 
-//$('#verifySubmit').on('click',buttonVerify);
+
 
 //lookup function
-
-const buttonLookup = function(){
+const buttonLookup = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const input = $('#lookupInput').val();
   let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
@@ -88,13 +95,14 @@ const buttonLookup = function(){
       ${employeeList[i].phoneNum}`;
     }
   }
-  $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+  $('.box2').append(`<div>${message}</div>`);
 }
 
-const lookupFunc= function(){
+const lookupFunc= function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box1').empty();
+  $('.box2').empty();
+  $('.box1').append(`<div><form>
   <input type="text" id="lookupInput" placeholder="Employee Name" autocomplete="off" />
   <button id="lookupSubmit">Lookup</button>
   </form></div>`);
@@ -103,8 +111,9 @@ const lookupFunc= function(){
 
 
 //contains Function
-const buttonContains = function(){
+const buttonContains = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const input = $('#containsInput').val();
   let message = '';
   for(let i=0;i<employeeList.length;i++){
@@ -115,16 +124,17 @@ const buttonContains = function(){
     }
   }
   if (message ===''){
-    $('#displayBoard').append(`<div class='box2'>Employee Not Found</div>`);  
+    $('.box2').append(`<div>Employee Not Found</div>`);  
   }else{
-    $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+    $('.box2').append(`<div>${message}</div>`);
   }
 }
 
-const containsFunc= function(){
+const containsFunc= function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box2').empty();
+  $('.box1').empty();
+  $('.box1').append(`<div><form>
   <input type="text" id="containsInput" placeholder="Employee Name" autocomplete="off" />
   <button id="containsSubmit">Contains</button>
   </form></div>`);
@@ -134,8 +144,9 @@ const containsFunc= function(){
 
 
 //update Function
-const buttonUpdate = function(){
+const buttonUpdate = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const input = $('#updateName').val();
   let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
@@ -148,13 +159,14 @@ const buttonUpdate = function(){
       employeeList[i].officeNum=$('#updateNumber').val();
     }
   }
-  $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+  $('.box2').append(`<div>${message}</div>`);
 }
 
-const updateFunc= function(){
+const updateFunc= function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box2').empty();
+  $('.box1').empty();
+  $('.box1').append(`<div><form>
   Name <input type="text" id="updateName" placeholder="Employee Name" autocomplete="off" />
   </br>
   Number <input type="text" id="updateNumber" placeholder="Office Number" autocomplete="off" />
@@ -168,8 +180,9 @@ const updateFunc= function(){
 
 
 //add Function
-const buttonAdd = function(){
+const buttonAdd = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const inputName = $('#addName').val();
   const inputNumber = $('#addNumber').val();
   const inputPhone = $('#addPhone').val();
@@ -179,13 +192,14 @@ const buttonAdd = function(){
     phoneNum: inputPhone
   })
   message =`${inputName}</br>#${inputNumber}</br>${inputPhone}</br></br>`;  
-  $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+  $('.box2').append(`<div>${message}</div>`);
 }
 
-const addFunc= function(){
+const addFunc= function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box1').empty();
+  $('.box2').empty();
+  $('.box1').append(`<div><form>
   Name <input type="text" id="addName" placeholder="Employee Name" autocomplete="off" />
   </br>
   Number <input type="text" id="addNumber" placeholder="Office Number" autocomplete="off" />
@@ -199,8 +213,9 @@ const addFunc= function(){
 
 
 //delete Function
-const buttonDelete = function(){
+const buttonDelete = function(event){
   event.preventDefault();
+  $('.box2').empty();
   const input = $('#deleteInput').val();
   let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
@@ -209,15 +224,16 @@ const buttonDelete = function(){
       message ='Employee Deleted';
     }
   }
-  $('#displayBoard').append(`<div class='box2'>${message}</div>`);
+  $('.box2').append(`<div>${message}</div>`);
 }
 
-const deleteFunc= function(){
+const deleteFunc= function(event){
   event.preventDefault();
-  $('#displayBoard').empty();
-  $('#displayBoard').append(`<div class='box1'><form>
+  $('.box1').empty();
+  $('.box2').empty();
+  $('.box1').append(`<div><form>
   <input type="text" id="deleteInput" placeholder="Employee Name" autocomplete="off" />
-  <button id="deleteSubmit">Contains</button>
+  <button id="deleteSubmit">Delete</button>
   </form></div>`);
   $('#deleteSubmit').on('click',buttonDelete);
 }
