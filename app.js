@@ -56,7 +56,7 @@ const buttonVerify = function(){
   const input = $('#verifyInput').val();
   let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === input.toLowerCase){
+    if (employeeList[i].name.toLowerCase() === input.toLowerCase()){
       message = 'Employee Found';
     }
   }
@@ -73,129 +73,163 @@ const verifyFunc = function(){
   $('#verifySubmit').on('click',buttonVerify);
 } 
 
+//$('#verifySubmit').on('click',buttonVerify);
 
-/*
+//lookup function
+
+const buttonLookup = function(){
+  event.preventDefault();
+  const input = $('#lookupInput').val();
+  let message = 'Employee Not Found';
+  for(let i=0;i<employeeList.length;i++){
+    if (employeeList[i].name.toLowerCase() === input.toLowerCase()){
+      message =`${employeeList[i].name}</br> 
+      #${employeeList[i].officeNum}</br> 
+      ${employeeList[i].phoneNum}`;
+    }
+  }
+  $('#displayBoard').append(`<div>${message}</div>`);
+}
+
 const lookupFunc= function(){
-  let message = 'Not in list!'
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === searchName){
-      message =`Name: ${employeeList[i].name}, 
-      Office Number: ${employeeList[i].officeNum}, 
-      Phone Number:  ${employeeList[i].phoneNum}`; 
-    }
-  }
-  render(message);
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  <input type="text" id="lookupInput" placeholder="Employee Name" autocomplete="off" />
+  <button id="lookupSubmit">Lookup</button>
+  </form></div>`);
+  $('#lookupSubmit').on('click',buttonLookup);
 }
 
-const containsFunc = function(){
-  let found=false;
-  for (let i=0;i< employeeList.length;i++){
-    if (employeeList[i].name.indexOf(keyword)!== -1){
-      render(employeeList[i].name);
-      found=true;
+
+//contains Function
+const buttonContains = function(){
+  event.preventDefault();
+  const input = $('#containsInput').val();
+  let message = '';
+  for(let i=0;i<employeeList.length;i++){
+    if (employeeList[i].name.indexOf(input)!= -1){
+      message =`${message}${employeeList[i].name}</br> 
+      #${employeeList[i].officeNum}</br> 
+      ${employeeList[i].phoneNum}</br></br>`;
     }
   }
-  if (!found){
-    render('no match');
+  if (message ===''){
+    $('#displayBoard').append(`<div>Employee Not Found</div>`);  
+  }else{
+    $('#displayBoard').append(`<div>${message}</div>`);
   }
 }
-*/
+
+const containsFunc= function(){
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  <input type="text" id="containsInput" placeholder="Employee Name" autocomplete="off" />
+  <button id="containsSubmit">Contains</button>
+  </form></div>`);
+  $('#containsSubmit').on('click',buttonContains);
+}
 
 
-/*
-if(userCommand === 'print'){
+
+//update Function
+const buttonUpdate = function(){
+  event.preventDefault();
+  const input = $('#updateName').val();
+  let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
-    render(`Name:${employeeList[i].name}, Office Number: ${employeeList[i].officeNum}, Phone Number: ${employeeList[i].phoneNum}`);
-  }
-}else if(userCommand === 'verify'){
-  const searchName = prompt("enter name you want to search!").toLowerCase();
-  let message = 'False';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === searchName){
-      message = 'True';
+    if (employeeList[i].name === input){
+      message =`${input}</br> 
+      #${$('#updateNumber').val()}</br> 
+      ${$('#updatePhone').val()}</br></br>`;
+      employeeList[i].name = input;
+      employeeList[i].phoneNum=$('#updatePhone').val();
+      employeeList[i].officeNum=$('#updateNumber').val();
     }
   }
-  render(message);
-}else if(userCommand === 'lookup'){
-  const searchName = prompt("enter name you want to search!").toLowerCase();
-  let message = 'Not in list!'
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === searchName){
-      message =`Name: ${employeeList[i].name}, 
-      Office Number: ${employeeList[i].officeNum}, 
-      Phone Number:  ${employeeList[i].phoneNum}`; 
-    }
-  }
-  render(message);
-}else if(userCommand === 'contains'){
-  const keyword=prompt('enter keyword to search!');
-  let found=false;
-  for (let i=0;i< employeeList.length;i++){
-    if (employeeList[i].name.indexOf(keyword)!== -1){
-      render(employeeList[i].name);
-      found=true;
-    }
-  }
-  if (!found){
-    render('no match');
-  }
-}else if(userCommand === 'update'){
-  const nameToUpdate = prompt('enter the name to be updated here');
-  const field = prompt('enter the  field to be updated here');
-  const value = prompt('enter the new value here');
-  let found= false;
+  $('#displayBoard').append(`<div>${message}</div>`);
+}
 
-  for(let i=0;i< employeeList.length;i++){
-    if (nameToUpdate === employeeList[i].name){
-       if (field==='name'){
-         employeeList[i].name=value;
-       }else if (field ==='officeNum'){
-         employeeList[i].officeNum = value;
-       }else if (field === 'phoneNum'){
-         employeeList[i].officeNum = value;
-       }else{
-         render('wrong field!');
-       }
-       console.log(employeeList[i]);
-       found = true;
-    }
-  }
-  if (!found) {
-    render('entered name in not in list');
-  }
+const updateFunc= function(){
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  Name <input type="text" id="updateName" placeholder="Employee Name" autocomplete="off" />
+  </br>
+  Number <input type="text" id="updateNumber" placeholder="Office Number" autocomplete="off" />
+  </br>
+  Phone <input type="text" id="updatePhone" placeholder="Phone Number" autocomplete="off" />
+  </br>
+  <button id="updateSubmit" style='justify-contents:center;'>Update</button>
+  </form></div>`);
+  $('#updateSubmit').on('click',buttonUpdate);
+}
 
-}else if(userCommand === 'add'){
-  const newName =prompt('enter the name you want to add');
-  const newOfficeNum = prompt('enter the office number');
-  const newPhoneNum = prompt('enter the phone number');
+
+//add Function
+const buttonAdd = function(){
+  event.preventDefault();
+  const inputName = $('#addName').val();
+  const inputNumber = $('#addNumber').val();
+  const inputPhone = $('#addPhone').val();
   employeeList.push({
-    name:newName,
-    officeNum: newOfficeNum,
-    phoneNum: newPhoneNum
+    name:inputName,
+    officeNum: inputNumber,
+    phoneNum: inputPhone
   })
-  for(let i=0;i<employeeList.length;i++){
-    render(`Name:${employeeList[i].name}, Office Number: ${employeeList[i].officeNum}, Phone Number: ${employeeList[i].phoneNum}`);
-  }
+  message =`${inputName}</br>#${inputNumber}</br>${inputPhone}</br></br>`;  
+  $('#displayBoard').append(`<div>${message}</div>`);
+}
 
-}else if(userCommand === 'delete'){
-  const nameDel = prompt('enter the name to be deleted');
+const addFunc= function(){
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  Name <input type="text" id="addName" placeholder="Employee Name" autocomplete="off" />
+  </br>
+  Number <input type="text" id="addNumber" placeholder="Office Number" autocomplete="off" />
+  </br>
+  Phone <input type="text" id="addPhone" placeholder="Phone Number" autocomplete="off" />
+  </br>
+  <button id="addSubmit">Add</button>
+  </form></div>`);
+  $('#addSubmit').on('click',buttonAdd);
+}
+
+
+//delete Function
+const buttonDelete = function(){
+  event.preventDefault();
+  const input = $('#deleteInput').val();
+  let message = 'Employee Not Found';
   for(let i=0;i<employeeList.length;i++){
-    if (nameDel === employeeList[i].name){
+    if (employeeList[i].name === input){
       employeeList.splice(i,1);
+      message ='Employee Deleted';
     }
-    render(`Name:${employeeList[i].name}, Office Number: ${employeeList[i].officeNum}, Phone Number: ${employeeList[i].phoneNum}`);
   }
-}else{
-  render('command not found!!!!');
-}*/
+  $('#displayBoard').append(`<div>${message}</div>`);
+}
+
+const deleteFunc= function(){
+  event.preventDefault();
+  $('#displayBoard').empty();
+  $('#displayBoard').append(`<div><form>
+  <input type="text" id="deleteInput" placeholder="Employee Name" autocomplete="off" />
+  <button id="deleteSubmit">Contains</button>
+  </form></div>`);
+  $('#deleteSubmit').on('click',buttonDelete);
+}
+
 
 $('#print').on('click',printFunc);
-$('#verify').on('click',verifyFunc);/*
+$('#verify').on('click',verifyFunc);
 $('#lookup').on('click',lookupFunc);
-$('#contains').on('click',contatinsFunc);
-$('#updates').on('click',updatesFunc);
+$('#contains').on('click',containsFunc);
+$('#update').on('click',updateFunc);
 $('#add').on('click',addFunc);
-$('#delete').on('click',deleteFunc);*/
+$('#delete').on('click',deleteFunc);
 
 
 
