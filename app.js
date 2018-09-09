@@ -51,6 +51,7 @@ const printFunc = function(){
   }
 }
 
+
 // verify function
 const buttonVerify = function(event){
   event.preventDefault();
@@ -70,15 +71,14 @@ const verifyFunc = function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
-  //document.querySelectorAll('hr').style='display:block;';
   $('.box1').append(`<div><form>
   <input type="text" id="verifyInput" placeholder="Employee Name" autocomplete="off" />
   <button id="verifySubmit">Verify</button>
-  </form></div>`);
+  </form><hr></div>`);
 
   $('#verifySubmit').on('click',buttonVerify);
 } 
-$('#verifySubmit').on('click',buttonVerify);
+//$('#verifySubmit').on('click',buttonVerify);
 
 
 
@@ -105,7 +105,7 @@ const lookupFunc= function(event){
   $('.box1').append(`<div><form>
   <input type="text" id="lookupInput" placeholder="Employee Name" autocomplete="off" />
   <button id="lookupSubmit">Lookup</button>
-  </form></div>`);
+  </form><hr></div>`);
   $('#lookupSubmit').on('click',buttonLookup);
 }
 
@@ -135,9 +135,9 @@ const containsFunc= function(event){
   $('.box2').empty();
   $('.box1').empty();
   $('.box1').append(`<div><form>
-  <input type="text" id="containsInput" placeholder="Employee Name" autocomplete="off" />
+  <input type="text" id="containsInput" placeholder="Keyword" autocomplete="off" />
   <button id="containsSubmit">Contains</button>
-  </form></div>`);
+  </form><hr></div>`);
   $('#containsSubmit').on('click',buttonContains);
 }
 
@@ -166,15 +166,15 @@ const updateFunc= function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
-  $('.box1').append(`<div><form>
+  $('.box1').append(`<div><form><div class='right'>
   Name <input type="text" id="updateName" placeholder="Employee Name" autocomplete="off" />
   </br>
   Number <input type="text" id="updateNumber" placeholder="Office Number" autocomplete="off" />
   </br>
   Phone <input type="text" id="updatePhone" placeholder="Phone Number" autocomplete="off" />
-  </br>
+  </br></div>
   <button id="updateSubmit">Update</button>
-  </form></div>`);
+  </form><hr></div>`);
   $('#updateSubmit').on('click',buttonUpdate);
 }
 
@@ -199,15 +199,15 @@ const addFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
-  $('.box1').append(`<div><form>
+  $('.box1').append(`<div><form><div class='right'>
   Name <input type="text" id="addName" placeholder="Employee Name" autocomplete="off" />
   </br>
   Number <input type="text" id="addNumber" placeholder="Office Number" autocomplete="off" />
   </br>
   Phone <input type="text" id="addPhone" placeholder="Phone Number" autocomplete="off" />
-  </br>
+  </br></div>
   <button id="addSubmit">Add</button>
-  </form></div>`);
+  </form><hr></div>`);
   $('#addSubmit').on('click',buttonAdd);
 }
 
@@ -234,7 +234,7 @@ const deleteFunc= function(event){
   $('.box1').append(`<div><form>
   <input type="text" id="deleteInput" placeholder="Employee Name" autocomplete="off" />
   <button id="deleteSubmit">Delete</button>
-  </form></div>`);
+  </form><hr></div>`);
   $('#deleteSubmit').on('click',buttonDelete);
 }
 
