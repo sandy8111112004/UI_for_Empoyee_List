@@ -1,54 +1,60 @@
-const employeeList = [
-  {
-    name: 'Jan',
-    officeNum: 1,
-    phoneNum: '222-222-2222'
-  },
-  {
-    name: 'Juan',
-    officeNum: 304,
-    phoneNum: '489-789-8789'
-  },
-  {
-    name: 'Margie',
-    officeNum: 789,
-    phoneNum: '789-789-7897'
-  },
-  {
-    name: 'Sara',
-    officeNum: 32,
-    phoneNum: '222-789-4654'
-  },
-  {
-    name: 'Tyrell',
-    officeNum: 3,
-    phoneNum: '566-621-0452'
-  },
-  {
-    name: 'Tasha',
-    officeNum: 213,
-    phoneNum: '789-766-5675'
-  },
-  {
-    name: 'Ty',
-    officeNum: 211,
-    phoneNum: '789-766-7865'
-  },
-  {
-    name: 'Sarah',
-    officeNum: 345,
-    phoneNum: '222-789-5231'
-  }
-];
-
+const state={
+  employeeList: [
+    {
+      name: 'Jan',
+      officeNum: 1,
+      phoneNum: '222-222-2222'
+    },
+    {
+      name: 'Juan',
+      officeNum: 304,
+      phoneNum: '489-789-8789'
+    },
+    {
+      name: 'Margie',
+      officeNum: 789,
+      phoneNum: '789-789-7897'
+    },
+    {
+      name: 'Sara',
+      officeNum: 32,
+      phoneNum: '222-789-4654'
+    },
+    {
+      name: 'Tyrell',
+      officeNum: 3,
+      phoneNum: '566-621-0452'
+    },
+    {
+      name: 'Tasha',
+      officeNum: 213,
+      phoneNum: '789-766-5675'
+    },
+    {
+      name: 'Ty',
+      officeNum: 211,
+      phoneNum: '789-766-7865'
+    },
+    {
+      name: 'Sarah',
+      officeNum: 345,
+      phoneNum: '222-789-5231'
+    }
+  ]
+}
+const render=function(sel,content){
+  $(sel).append(content);
+}
 
 //print function
 const printFunc = function(){
   $('.box1').empty();
   $('.box2').empty();
-  for(let i=0;i<employeeList.length;i++){
-    $('.box2').append(`<div class='side'>${employeeList[i].name}</br>#${employeeList[i].officeNum}</br>${employeeList[i].phoneNum}</br></br></div>`);
-  }
+  document.querySelectorAll('#container').backgroundColor='#1d1c1c';
+  render('.box1',`<div class='display1'>The Minimalists Directory. </br> Employee List</br></br></br></div>` );
+  state.employeeList.forEach(
+    e=>render('.box2',`<div class='side display2'>Name: ${e.name}</br>Office Number: ${e.officeNum}</br>Phone: ${e.phoneNum}</br></br></div>`)
+  );
 }
 
 
@@ -58,27 +64,25 @@ const buttonVerify = function(event){
   $('.box2').empty();
   const input = $('#verifyInput').val();
   let message = 'Employee Not Found';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === input.toLowerCase()){
-      message = 'Employee Found';
-    }
+  let found = state.employeeList.some(e=>e.name.toLowerCase()===input.toLowerCase());
+  if (found){
+    message = 'Employee Found';
   }
-  console.log('in verify button');
-  $('.box2').append(`<div>${message}</div>`);
+  render('.box2',`<div>${message}</div>`);
 }
 
 const verifyFunc = function(event){
   event.preventDefault();
-  $('.box1').empty();
   $('.box2').empty();
-  $('.box1').append(`<div><form>
+  $('.box1').empty();
+  render('.box1',`<div><form>
   <input type="text" id="verifyInput" placeholder="Employee Name" autocomplete="off" />
   <button id="verifySubmit">Verify</button>
   </form><hr></div>`);
-
+  
   $('#verifySubmit').on('click',buttonVerify);
 } 
-//$('#verifySubmit').on('click',buttonVerify);
+
 
 
 
@@ -88,24 +92,24 @@ const buttonLookup = function(event){
   $('.box2').empty();
   const input = $('#lookupInput').val();
   let message = 'Employee Not Found';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.toLowerCase() === input.toLowerCase()){
-      message =`${employeeList[i].name}</br> 
-      #${employeeList[i].officeNum}</br> 
-      ${employeeList[i].phoneNum}`;
-    }
+  const lookupEmployee=state.employeeList.find(e=>e.name.toLowerCase()===input.toLowerCase());
+  if (lookupEmployee){
+    message =`Name: ${lookupEmployee.name}</br> 
+      Office Number: ${lookupEmployee.officeNum}</br> 
+      Phone: ${lookupEmployee.phoneNum}`;
   }
-  $('.box2').append(`<div>${message}</div>`);
+  render('.box2',`<div>${message}</div>`);
 }
 
 const lookupFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
-  $('.box1').append(`<div><form>
+  render('.box1',`<div><form>
   <input type="text" id="lookupInput" placeholder="Employee Name" autocomplete="off" />
   <button id="lookupSubmit">Lookup</button>
   </form><hr></div>`);
+  
   $('#lookupSubmit').on('click',buttonLookup);
 }
 
@@ -116,28 +120,26 @@ const buttonContains = function(event){
   $('.box2').empty();
   const input = $('#containsInput').val();
   let message = '';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name.indexOf(input)!= -1){
-      message =`${message}${employeeList[i].name}</br> 
-      #${employeeList[i].officeNum}</br> 
-      ${employeeList[i].phoneNum}</br></br>`;
-    }
-  }
-  if (message ===''){
-    $('.box2').append(`<div>Employee Not Found</div>`);  
+  const containList = state.employeeList.filter(e=>e.name.includes(input));
+  if (containList.length===0){
+    render('.box2',`<div>Employee Not Found</div>`);
   }else{
-    $('.box2').append(`<div>${message}</div>`);
+    containList.forEach(e=>render('.box2',`Name: ${e.name}</br> 
+    Office Number: ${e.officeNum}</br> 
+    Phone: ${e.phoneNum}</br></br>`));
   }
+  
 }
 
 const containsFunc= function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
-  $('.box1').append(`<div><form>
+  render('.box1',`<div><form>
   <input type="text" id="containsInput" placeholder="Keyword" autocomplete="off" />
   <button id="containsSubmit">Contains</button>
   </form><hr></div>`);
+  
   $('#containsSubmit').on('click',buttonContains);
 }
 
@@ -149,24 +151,25 @@ const buttonUpdate = function(event){
   $('.box2').empty();
   const input = $('#updateName').val();
   let message = 'Employee Not Found';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name === input){
-      message =`${input}</br> 
-      #${$('#updateNumber').val()}</br> 
-      ${$('#updatePhone').val()}</br></br>`;
-      employeeList[i].name = input;
-      employeeList[i].phoneNum=$('#updatePhone').val();
-      employeeList[i].officeNum=$('#updateNumber').val();
-    }
+  let updateEmployee=state.employeeList.find(e=>e.name===input);
+  if(updateEmployee){
+    render('.box2',`Name: ${input}</br> 
+    Office Number: ${$('#updateNumber').val()}</br> 
+    Phone: ${$('#updatePhone').val()}</br></br>`);
+    updateEmployee.name = input;
+    updateEmployee.phoneNum=$('#updatePhone').val();
+    updateEmployee.officeNum=$('#updateNumber').val();
+  }else{
+    render('.box2',`<div>${message}</div>`);
   }
-  $('.box2').append(`<div>${message}</div>`);
+  
 }
 
 const updateFunc= function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
-  $('.box1').append(`<div><form><div class='right'>
+  render('.box1',`<div><form><div class='right'>
   Name <input type="text" id="updateName" placeholder="Employee Name" autocomplete="off" />
   </br>
   Number <input type="text" id="updateNumber" placeholder="Office Number" autocomplete="off" />
@@ -175,6 +178,7 @@ const updateFunc= function(event){
   </br></div>
   <button id="updateSubmit">Update</button>
   </form><hr></div>`);
+  
   $('#updateSubmit').on('click',buttonUpdate);
 }
 
@@ -186,12 +190,12 @@ const buttonAdd = function(event){
   const inputName = $('#addName').val();
   const inputNumber = $('#addNumber').val();
   const inputPhone = $('#addPhone').val();
-  employeeList.push({
+  state.employeeList.push({
     name:inputName,
     officeNum: inputNumber,
     phoneNum: inputPhone
   })
-  message =`${inputName}</br>#${inputNumber}</br>${inputPhone}</br></br>`;  
+  message =`Name: ${inputName}</br>Office Number: ${inputNumber}</br>Phone: ${inputPhone}</br></br>`;  
   $('.box2').append(`<div>${message}</div>`);
 }
 
@@ -218,23 +222,25 @@ const buttonDelete = function(event){
   $('.box2').empty();
   const input = $('#deleteInput').val();
   let message = 'Employee Not Found';
-  for(let i=0;i<employeeList.length;i++){
-    if (employeeList[i].name === input){
-      employeeList.splice(i,1);
+  for(let i=0;i<state.employeeList.length;i++){
+    if (state.employeeList[i].name === input){
+      state.employeeList.splice(i,1);
       message ='Employee Deleted';
     }
   }
-  $('.box2').append(`<div>${message}</div>`);
+  render('.box2',`<div>${message}</div>`);
+  
 }
 
 const deleteFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
-  $('.box1').append(`<div><form>
+  render('.box1',`<div><form>
   <input type="text" id="deleteInput" placeholder="Employee Name" autocomplete="off" />
   <button id="deleteSubmit">Delete</button>
   </form><hr></div>`);
+
   $('#deleteSubmit').on('click',buttonDelete);
 }
 
