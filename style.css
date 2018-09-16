@@ -6,18 +6,30 @@ body {
 main {
     display: grid;
     height: 100vh;
-    grid-template-rows: 70px 1fr;
-    grid-template-columns: 70px 1fr;
+    grid-template-rows: 1fr;
+    grid-template-columns: 100px 1fr;
 }
 
 nav {
-    background-color: #666666;
+    background-color: #39393A;
     display: grid;
-    grid-row: span 2;
+    grid-row: span 1;
     grid-column: span 1;
     align-items: center;
     justify-content: center;
     padding:5px;
+}
+nav img{
+    height: 24px;
+}
+.center{
+    display: grid;
+    justify-content: center;
+}
+nav p{
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 #option{
     position: sticky;
@@ -30,45 +42,56 @@ button{
 
 nav button {
     border: none;
-    background-color: #666666;
-    color: white;
+    background-color: #39393A;
+    color: #999999;
     font-size: 14px;    
-}
-
-header {
-    background-color: #0E85E3;
-    color: white;
-    display: grid;
-    grid-row: span 1;
-    grid-column: span 1;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 5px;
-    padding-right: 10px;
-    font-size: 36px;
-    font-weight: bold;
 }
 
 #container {
     display: grid;
-    padding:10px;
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
+    grid-row: span 1;
+    grid-column: span 1;
+    align-items: center;
     justify-content: center;
+    margin: 10px;
     height: 98%;
+    padding: 10px;
     grid-template-columns: 1fr;
     grid-template-rows: 170px 1fr;
-    justify-content: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: #808B96 ;
+    opacity:0.8;
+    background-image: url('images/bckg.jpg');
+}
+.display2{
+    color: white;
     font-size: 20px;
-    color: #666666;
-    font-weight: normal;
+}
+.display1{
+    color: white;
+    font-size: 24px;
+}
+
+
+header{
+    margin-top: 60%;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    color: white;
+}
+
+h1{
+    font-size: 44px;
+}
+p{
+    font-size: 14px;
 }
 
 .box1 {
     padding-left: 50px;
     padding-right: 50px;
-    /*border-bottom: 2px solid #666666;*/
     text-align: center;
     line-height: 2;
     align-items: center;
@@ -76,6 +99,8 @@ header {
     grid-row: span 1;
     grid-column: span 1;
     justify-content: center;
+    color: white;
+    font-weight: bold;
 }
 hr { 
     display: block;
@@ -114,7 +139,7 @@ hr {
 }
 
 .box2 {
-    color: black;
+    color: white;
     font-size: 24px;
     font-weight: bold;
     padding-top: 10px;
@@ -122,5 +147,6 @@ hr {
     grid-row: span 1;
     grid-column: span 1;
     justify-content: center;
+    align-items: top;
 }
 
