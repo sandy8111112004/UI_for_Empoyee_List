@@ -62,8 +62,6 @@ nav button {
     background-blend-mode: multiply;
     background-color: #808B96 ;
     opacity:0.8;
-    /*background-color: #1d1c1c ; 
-    opacity:0.6;*/
     background-image: url('images/bckg.jpg');
 }
 .display2{
@@ -77,6 +75,7 @@ nav button {
 
 
 header{
+    margin-top: 60%;
     text-align: center;
     font-weight: bold;
     vertical-align: middle;

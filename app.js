@@ -42,6 +42,7 @@ const state={
     }
   ]
 }
+
 const render=function(sel,content){
   $(sel).append(content);
 }
@@ -50,7 +51,8 @@ const render=function(sel,content){
 const printFunc = function(){
   $('.box1').empty();
   $('.box2').empty();
-  document.querySelectorAll('#container').backgroundColor='#1d1c1c';
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div class='display1'>The Minimalists Directory. </br> Employee List</br></br></br></div>` );
   state.employeeList.forEach(
     e=>render('.box2',`<div class='side display2'>Name: ${e.name}</br>Office Number: ${e.officeNum}</br>Phone: ${e.phoneNum}</br></br></div>`)
@@ -62,6 +64,8 @@ const printFunc = function(){
 const buttonVerify = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const input = $('#verifyInput').val();
   let message = 'Employee Not Found';
   let found = state.employeeList.some(e=>e.name.toLowerCase()===input.toLowerCase());
@@ -75,6 +79,8 @@ const verifyFunc = function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div><form>
   <input type="text" id="verifyInput" placeholder="Employee Name" autocomplete="off" />
   <button id="verifySubmit">Verify</button>
@@ -90,6 +96,8 @@ const verifyFunc = function(event){
 const buttonLookup = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const input = $('#lookupInput').val();
   let message = 'Employee Not Found';
   const lookupEmployee=state.employeeList.find(e=>e.name.toLowerCase()===input.toLowerCase());
@@ -105,6 +113,8 @@ const lookupFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div><form>
   <input type="text" id="lookupInput" placeholder="Employee Name" autocomplete="off" />
   <button id="lookupSubmit">Lookup</button>
@@ -118,6 +128,8 @@ const lookupFunc= function(event){
 const buttonContains = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const input = $('#containsInput').val();
   let message = '';
   const containList = state.employeeList.filter(e=>e.name.includes(input));
@@ -135,6 +147,8 @@ const containsFunc= function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div><form>
   <input type="text" id="containsInput" placeholder="Keyword" autocomplete="off" />
   <button id="containsSubmit">Contains</button>
@@ -149,6 +163,8 @@ const containsFunc= function(event){
 const buttonUpdate = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const input = $('#updateName').val();
   let message = 'Employee Not Found';
   let updateEmployee=state.employeeList.find(e=>e.name===input);
@@ -169,6 +185,8 @@ const updateFunc= function(event){
   event.preventDefault();
   $('.box2').empty();
   $('.box1').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div><form><div class='right'>
   Name <input type="text" id="updateName" placeholder="Employee Name" autocomplete="off" />
   </br>
@@ -187,6 +205,8 @@ const updateFunc= function(event){
 const buttonAdd = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const inputName = $('#addName').val();
   const inputNumber = $('#addNumber').val();
   const inputPhone = $('#addPhone').val();
@@ -203,6 +223,8 @@ const addFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   $('.box1').append(`<div><form><div class='right'>
   Name <input type="text" id="addName" placeholder="Employee Name" autocomplete="off" />
   </br>
@@ -220,13 +242,14 @@ const addFunc= function(event){
 const buttonDelete = function(event){
   event.preventDefault();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   const input = $('#deleteInput').val();
   let message = 'Employee Not Found';
-  for(let i=0;i<state.employeeList.length;i++){
-    if (state.employeeList[i].name === input){
-      state.employeeList.splice(i,1);
-      message ='Employee Deleted';
-    }
+  const index = state.employeeList.map(e=>e.name).indexOf(input);
+  if (index != -1){
+    state.employeeList.splice(index,1);
+    message ='Employee Deleted';
   }
   render('.box2',`<div>${message}</div>`);
   
@@ -236,6 +259,8 @@ const deleteFunc= function(event){
   event.preventDefault();
   $('.box1').empty();
   $('.box2').empty();
+  document.getElementById('container').style.backgroundColor='#1d1c1c';
+  document.getElementById('container').style.opacity='0.6';
   render('.box1',`<div><form>
   <input type="text" id="deleteInput" placeholder="Employee Name" autocomplete="off" />
   <button id="deleteSubmit">Delete</button>
